@@ -20,6 +20,14 @@ export class AssignmentsComponent implements OnInit {
     this.assignments = this.gameRepository.GetGame()?.Assignments;
   }
 
+  GetExpirationText(assignment: Assignment): string{
+    if(assignment.Expiration<0){
+        return "No Expiration";
+    }
+    
+    return `Expires in ${assignment.Expiration} turns`; 
+}
+
   ngOnInit(): void {
     this.ReloadAssignments();
     this.subscriptions.push(

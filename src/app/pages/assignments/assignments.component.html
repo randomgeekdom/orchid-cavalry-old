@@ -1,10 +1,28 @@
-<div *ngIf="!!assignments && assignments.length>0" >
+<div *ngIf="!!assignments && assignments.length>0">
 
 </div>
-<div  *ngIf="!assignments || assignments.length==0"  class="d-flex justify-content-center">
-    No Assignments Available
+<div *ngIf="!assignments || assignments.length==0" class="d-flex justify-content-center">
+  No Assignments Available
 </div>
 
-<div *ngFor="let assignment of assignments">
-    {{assignment.Title}}
+<div class="row">
+  <div class="card" *ngFor="let assignment of assignments">
+    <div class="card-body">
+
+      <h4 class="card-title">
+        <i [ngClass]="'fa fa-' + assignment.Icon"></i>
+        {{assignment.Title}}
+      </h4>
+
+      <h6 class="card-subtitle text-muted">{{GetExpirationText(assignment)}}</h6>
+      <p class="card-text">{{assignment.Description}}</p>
+      <p class="card-footer"><i class="fa fa-clock"></i> {{assignment.Turns}}
+        {{assignment.Turns == 1 ? "turn" : "turns"}}</p>
+    </div>
+    <div class="card-body">
+
+      <a class="btn btn-primary">Deploy Unit</a>
+    </div>
+
+  </div>
 </div>
