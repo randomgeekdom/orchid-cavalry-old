@@ -15,4 +15,6 @@ export default class Assignment{
     constructor(){
         this.Key = Guid.create();
     }
+
+
 }
