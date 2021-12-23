@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import Game from 'src/app/model/Game';
+import AssignmentGenerator from './services/AssignmentGenerator';
 import GameRepository from './services/GameRepository';
+import { PubsubService } from '@fsms/angular-pubsub';
+import { NextTurnMessage } from './services/NextTurnMessage';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +12,18 @@ import GameRepository from './services/GameRepository';
 })
 export class AppComponent {
   title:string  = 'orchid-cavalry';
-  isLoaded:boolean = false;
   game: Game | undefined;
-  gameRepository: GameRepository;
 
-  constructor(gameRepository: GameRepository){
-    this.gameRepository = gameRepository;
+  constructor(
+    private gameRepository: GameRepository, private assignmentGenerator: AssignmentGenerator,  private pubsubService: PubsubService){
   }
 
+   public get isLoaded(){
+     return !!this.game;
+   }
+
   ngOnInit() {
-    if(!!this.gameRepository.GetGame()){
-        this.isLoaded = true;
-    }
+    this.game = this.gameRepository.GetGame();
   }
 
   StartGame(){
@@ -34,7 +37,16 @@ export class AppComponent {
     this.game.CharacterName = result;
 
     this.gameRepository.SaveGame(this.game);
+  }
 
-    this.isLoaded=true;
+  NextTurn(){
+    if(!!this.game){
+      this.assignmentGenerator.GetNewAssignments(this.game);
+      this.gameRepository.SaveGame(this.game);
+      
+      this.pubsubService.publish( 
+        new NextTurnMessage()
+      );
+    }
   }
 }

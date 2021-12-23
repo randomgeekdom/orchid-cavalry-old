@@ -1,11 +1,10 @@
 <div class="d-flex justify-content-center">
   <div>
-    <div *ngIf="!isLoaded" >
-      <p class="mx-5">You have inherited the PISTIL, the remnants of a military installation belonging to a once
-        powerful military force that, long ago, saved the world from catastrophe. Your goal is to return the PISTIL to
-        its former grandeur by restoring the name and glory of the...</p>
+    <div *ngIf="!isLoaded">
+      <p class="mx-5">You have inherited Orchid Island, the last basion of a once powerful military force that, long
+        ago, saved the world from catastrophe. Your goal is to restore the name and glory of the...</p>
     </div>
-    
+
     <div class="d-flex justify-content-center">
       <img alt="Orchid Cavalry Logo" class="img-fluid" src="../assets/logo.png">
     </div>
@@ -16,22 +15,22 @@
 
     <div *ngIf="isLoaded">
       <nav class="navbar navbar-dark bg-dark ">
-        <a class="navbar-brand">Missions</a>
+        <a class="navbar-brand" [routerLink]="">Assignments</a>
         <a class="navbar-brand">Units</a>
-        <a class="navbar-brand">Buildings</a>
         <a class="navbar-brand">Treasury</a>
         <a class="navbar-brand">Factions</a>
+        <a class="navbar-brand">History</a>
         <a class="navbar-brand">Achievements</a>
         <a class="navbar-brand">Game Data</a>
       </nav>
 
-      <div>
+      <div class = "jumbotron">
         <router-outlet></router-outlet>
       </div>
       <div *ngIf="isLoaded" class="d-flex justify-content-center">
-          <a class="btn btn-success">
-              Next Turn
-          </a>
+        <a (click)="NextTurn()" class="btn btn-success">
+          Next Turn
+        </a>
       </div>
 
     </div>

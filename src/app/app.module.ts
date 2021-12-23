@@ -3,20 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AssignmentsComponent } from './pages/assignments/assignments.component';
+import { PubsubModule } from '@fsms/angular-pubsub';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     AssignmentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    PubsubModule.forRoot(),
     NgbModule
   ],
   providers: [],

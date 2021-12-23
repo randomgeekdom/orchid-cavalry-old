@@ -1,4 +1,5 @@
-export enum AssignmentType{
-    Unique,
-    Construction
+export enum AssignmentType {
+  Unique,
+  Construction,
+  Exploration
 }
