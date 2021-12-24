@@ -26,7 +26,7 @@ export class AssignmentsComponent implements OnInit {
         return "No Expiration";
     }
     
-    return `Expires in ${assignment.Expiration} turns`; 
+    return `Expires in ${assignment.Expiration} ${assignment.Turns == 1 ? "turn" : "turns"}`; 
 }
 
   ngOnInit(): void {

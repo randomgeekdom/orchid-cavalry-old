@@ -14,17 +14,19 @@
         {{assignment.Title}}
       </h4>
 
-      <h6 class="card-subtitle text-muted">{{GetExpirationText(assignment)}}</h6>
+      <h6 class="card-subtitle text-muted">
+        <i class="fa fa-stopwatch"></i> {{GetExpirationText(assignment)}}
+      </h6>
       <p class="card-text">{{assignment.Description}}</p>
-      <p class="card-footer"><i class="fa fa-clock"></i> {{assignment.Turns}}
-        {{assignment.Turns == 1 ? "turn" : "turns"}} 
-    </p>
+      <p class="card-footer">
+        <i class="fa fa-clock"></i> {{assignment.Turns}} {{assignment.Turns == 1 ? "turn" : "turns"}}
+      </p>
     </div>
     <div class="card-body">
 
-        <div *ngFor="let assignmentOption of assignment.Options">
-            <a class="btn btn-sm btn-primary">{{assignmentOption.Text}}</a>
-        </div>
+      <div *ngFor="let assignmentOption of assignment.Options">
+        <a class="btn btn-sm btn-primary">{{assignmentOption.Text}}</a>
+      </div>
     </div>
 
   </div>
