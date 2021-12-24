@@ -1,0 +1,28 @@
+<div *ngIf="!!units && units.length>0">
+
+</div>
+<div *ngIf="!units || units.length==0" class="d-flex justify-content-center">
+  No Assignments Available
+</div>
+
+<div class="row">
+  <div class="card" *ngFor="let unit of units">
+    <div class="card-body">
+
+      <h4 class="card-title">
+        <i [ngClass]="'fa fa-' + GetIcon(unit)"></i>
+        {{unit.Name}}
+      </h4>
+
+      <!-- <h6 class="card-subtitle text-muted">{{GetExpirationText(unit)}}</h6> -->
+      <p class="card-text">{{unit.Description}}</p>
+    </div>
+    <!-- <div class="card-body">
+
+        <div *ngFor="let unitOption of unit.Options">
+            <a class="btn btn-sm btn-primary">{{unitOption.Text}}</a>
+        </div>
+    </div> -->
+
+  </div>
+</div>

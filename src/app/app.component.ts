@@ -4,6 +4,8 @@ import AssignmentGenerator from './services/AssignmentGenerator';
 import GameRepository from './services/GameRepository';
 import { PubsubService } from '@fsms/angular-pubsub';
 import { NextTurnMessage } from './services/NextTurnMessage';
+import Unit from './model/Unit';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,7 @@ export class AppComponent {
   game: Game | undefined;
 
   constructor(
-    private gameRepository: GameRepository, private assignmentGenerator: AssignmentGenerator,  private pubsubService: PubsubService){
+    private gameRepository: GameRepository, private assignmentGenerator: AssignmentGenerator,  private pubsubService: PubsubService, public router:Router){
   }
 
    public get isLoaded(){
@@ -34,7 +36,11 @@ export class AppComponent {
     }
 
     this.game = new Game();
-    this.game.CharacterName = result;
+    
+    var unit = new Unit();
+    unit.Name = `${result} Orchid`;
+    unit.Description = "Orchid Cavalry Commander";
+    this.game.Units.push(unit);
 
     this.gameRepository.SaveGame(this.game);
   }

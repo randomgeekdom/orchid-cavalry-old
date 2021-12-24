@@ -6,7 +6,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <img alt="Orchid Cavalry Logo" class="img-fluid" src="../assets/logo.png">
+      <a [routerLink]=""><img alt="Orchid Cavalry Logo" class="img-fluid" src="../assets/logo.png"></a>
     </div>
 
     <div *ngIf="!isLoaded" class="d-flex justify-content-center">
@@ -15,13 +15,13 @@
 
     <div *ngIf="isLoaded">
       <nav class="navbar navbar-dark bg-dark ">
-        <a class="navbar-brand" [routerLink]="">Assignments</a>
-        <a class="navbar-brand">Units</a>
+        <a *ngFor="let route of router.config" class="navbar-brand" [routerLink]="route.path">{{route.path}}</a>
+<!--         
         <a class="navbar-brand">Treasury</a>
         <a class="navbar-brand">Factions</a>
         <a class="navbar-brand">History</a>
         <a class="navbar-brand">Achievements</a>
-        <a class="navbar-brand">Game Data</a>
+        <a class="navbar-brand">Game Data</a>  -->
       </nav>
 
       <div class = "jumbotron">

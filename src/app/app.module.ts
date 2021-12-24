@@ -7,11 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AssignmentsComponent } from './pages/assignments/assignments.component';
 import { PubsubModule } from '@fsms/angular-pubsub';
+import { UnitsComponent } from './pages/units/units.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AssignmentsComponent
+    AssignmentsComponent,
+    UnitsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import Assignment from '../model/Assignment';
+import AssignmentOption from '../model/AssignmentOption';
 import { AssignmentStatus } from '../model/Enums/AssignmentStatus';
-import { AssignmentType } from '../model/Enums/AssignmentType';
+import { Characteristic } from '../model/Enums/Characteristic';
 import Game from '../model/Game';
 
 @Injectable({
@@ -11,7 +12,7 @@ import Game from '../model/Game';
 })
 export default class AssignmentGenerator {
   public GetNewAssignments(game: Game): void {
-    debugger;
+
     var currentAssignments = game.Assignments;
     currentAssignments.forEach(a => {
       a.Expiration--;
@@ -30,8 +31,15 @@ export default class AssignmentGenerator {
     var explorationAssignment = new Assignment();
     explorationAssignment.Icon = "map";
     explorationAssignment.Title = "General Exploration";
-    explorationAssignment.Description = "Explore the world and see what's out there.";
-    explorationAssignment.Type = AssignmentType.Exploration;
+    explorationAssignment.Description = "Explore the world and discover new locations.";
+
+    var option = new AssignmentOption();
+    option.Characteristic = Characteristic.Exploration;
+    option.Text = "Explore";
+
+    explorationAssignment.Options = [
+      option      
+    ];
     return explorationAssignment;
   }
 }
