@@ -14,15 +14,8 @@
         {{unit.Name}}
       </h4>
 
-      <!-- <h6 class="card-subtitle text-muted">{{GetExpirationText(unit)}}</h6> -->
+      <h6 class="card-subtitle text-muted">{{unit.Characteristics.join(" | ")}}</h6>
       <p class="card-text">{{unit.Description}}</p>
     </div>
-    <!-- <div class="card-body">
-
-        <div *ngFor="let unitOption of unit.Options">
-            <a class="btn btn-sm btn-primary">{{unitOption.Text}}</a>
-        </div>
-    </div> -->
-
   </div>
 </div>
