@@ -3,6 +3,7 @@ import Assignment from 'src/app/model/Assignment';
 import GameRepository from 'src/app/services/GameRepository';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
 import { NextTurnMessage } from 'src/app/services/NextTurnMessage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignments',
