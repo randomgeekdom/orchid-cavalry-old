@@ -1,12 +1,10 @@
-
-<div *ngIf="!game?.Assignments" class="d-flex justify-content-center">
+<div *ngIf="!game?.Assignments?.length" class="d-flex justify-content-center">
   No Assignments Available
 </div>
 
 <div class="row" *ngIf="!IsSelectingUnit()">
   <div class="card" *ngFor="let assignment of game?.Assignments">
     <div class="card-body">
-
       <h4 class="card-title">
         <i [ngClass]="'fa fa-' + assignment.Icon"></i>
         {{assignment.Title}}
@@ -26,17 +24,23 @@
     <div class="card-body" *ngIf="IsAssignmentOpen(assignment)">
 
       <div *ngFor="let assignmentOption of assignment.Options">
-        <a class="btn btn-sm btn-primary" (click)="SelectAssignment(assignment, assignmentOption)">{{assignmentOption.Text}}</a>
+        <a class="btn btn-sm btn-primary"
+          (click)="SelectAssignment(assignment, assignmentOption)">{{assignmentOption.Text}}</a>
       </div>
     </div>
 
   </div>
 </div>
 
-<div *ngIf="IsSelectingUnit()" class="row">
-  <div class="card" *ngFor="let unit of GetOpenUnits()">
-    <a class="btn btn-secondary" (click)="AssignUnit(unit)">
-      <app-unitview [unit]="unit"></app-unitview>
-    </a>
+<div *ngIf="IsSelectingUnit()">
+  <div class="row">
+    <div class="card" *ngFor="let unit of GetOpenUnits()">
+      <a class="btn btn-secondary" (click)="AssignUnit(unit)">
+        <app-unitview [unit]="unit"></app-unitview>
+      </a>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <a class="btn btn-danger" (click)="CancelAssignment()">Cancel</a>
   </div>
 </div>

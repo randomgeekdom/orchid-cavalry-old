@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import Game from 'src/app/model/Game';
-import AssignmentGenerator from './services/AssignmentGenerator';
+import AssignmentService from './services/AssignmentService';
 import GameRepository from './services/GameRepository';
 import { PubsubService } from '@fsms/angular-pubsub';
 import { NextTurnMessage } from './services/NextTurnMessage';
@@ -17,7 +17,7 @@ export class AppComponent {
   game: Game | undefined;
 
   constructor(
-    private gameRepository: GameRepository, private assignmentGenerator: AssignmentGenerator, private pubsubService: PubsubService, public router: Router) {
+    private gameRepository: GameRepository, private assignmentService: AssignmentService, private pubsubService: PubsubService, public router: Router) {
   }
 
   public get isLoaded() {
@@ -47,7 +47,7 @@ export class AppComponent {
 
   NextTurn() {
     if (!!this.game) {
-      this.assignmentGenerator.GetNewAssignments(this.game);
+      this.assignmentService.GetNewAssignments(this.game);
       this.gameRepository.SaveGame(this.game);
 
       this.pubsubService.publish(
