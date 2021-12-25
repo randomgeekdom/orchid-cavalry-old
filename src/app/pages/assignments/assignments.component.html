@@ -1,12 +1,10 @@
-<div *ngIf="!!assignments && assignments.length>0">
 
-</div>
-<div *ngIf="!assignments || assignments.length==0" class="d-flex justify-content-center">
+<div *ngIf="!game?.Assignments" class="d-flex justify-content-center">
   No Assignments Available
 </div>
 
-<div class="row">
-  <div class="card" *ngFor="let assignment of assignments">
+<div class="row" *ngIf="!IsSelectingUnit()">
+  <div class="card" *ngFor="let assignment of game?.Assignments">
     <div class="card-body">
 
       <h4 class="card-title">
@@ -21,13 +19,24 @@
       <p class="card-footer">
         <i class="fa fa-clock"></i> {{assignment.Turns}} {{assignment.Turns == 1 ? "turn" : "turns"}}
       </p>
+      <h6 class="card-subtitle text-muted">
+        <i class="fa fa-stopwatch"></i> {{GetStatusText(assignment.Status)}}
+      </h6>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="IsAssignmentOpen(assignment)">
 
       <div *ngFor="let assignmentOption of assignment.Options">
-        <a class="btn btn-sm btn-primary">{{assignmentOption.Text}}</a>
+        <a class="btn btn-sm btn-primary" (click)="SelectAssignment(assignment, assignmentOption)">{{assignmentOption.Text}}</a>
       </div>
     </div>
 
+  </div>
+</div>
+
+<div *ngIf="IsSelectingUnit()" class="row">
+  <div class="card" *ngFor="let unit of GetOpenUnits()">
+    <a class="btn btn-secondary" (click)="AssignUnit(unit)">
+      <app-unitview [unit]="unit"></app-unitview>
+    </a>
   </div>
 </div>

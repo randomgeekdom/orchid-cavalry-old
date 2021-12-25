@@ -4,40 +4,30 @@ import GameRepository from 'src/app/services/GameRepository';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
 import { NextTurnMessage } from 'src/app/services/NextTurnMessage';
 import { UnitIdentifier } from 'src/app/model/Enums/UnitIdentifier';
+import BaseComponent from 'src/app/BaseComponent';
 
 @Component({
   selector: 'app-units',
   templateUrl: './units.component.html',
   styleUrls: ['./units.component.scss']
 })
-export class UnitsComponent implements OnInit {
+export class UnitsComponent extends BaseComponent {
   units: Unit[] | undefined;
-  subscriptions: PubsubSubscription[] = [];
 
-  constructor(private gameRepository: GameRepository, private pubsubService: PubsubService) {
+  constructor(private gameRepository: GameRepository, pubsubService: PubsubService) {
+    super(pubsubService);
   }
 
-  ReloadUnits() {
+  Reload() {
     this.units = this.gameRepository.GetGame()?.Units;
   }
 
-  GetIcon(unit: Unit){
-    switch(unit.Identifier){
-      case UnitIdentifier.Complex:
-        return "users";
-        case UnitIdentifier.Leader:
-          return "crown";
-          default:
-            return "user";
-    }
-  }
-
   ngOnInit(): void {
-    this.ReloadUnits();
+    this.Reload();
     this.subscriptions.push(
       this.pubsubService.subscribe({
         messageType: NextTurnMessage.messageType,
-        callback: (msg) => this.ReloadUnits(),
+        callback: (msg) => this.Reload(),
       })
     );
   }

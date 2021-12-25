@@ -8,14 +8,7 @@
 <div class="row">
   <div class="card" *ngFor="let unit of units">
     <div class="card-body">
-
-      <h4 class="card-title">
-        <i [ngClass]="'fa fa-' + GetIcon(unit)"></i>
-        {{unit.Name}}
-      </h4>
-
-      <h6 class="card-subtitle text-muted">{{unit.Characteristics.join(" | ")}}</h6>
-      <p class="card-text">{{unit.Description}}</p>
+      <app-unitview [unit]="unit"></app-unitview>
     </div>
   </div>
 </div>
