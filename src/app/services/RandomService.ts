@@ -1,3 +1,10 @@
+import { Injectable } from "@angular/core";
+
+@Injectable({
+    // declares that this service should be created
+    // by the root application injector.
+    providedIn: 'root',
+  })
 export default class BiomeService{
 
     GetRandomElement<T>(array: T[]):T | undefined
