@@ -6,6 +6,7 @@ import { PubsubService } from '@fsms/angular-pubsub';
 import { NextTurnMessage } from './services/NextTurnMessage';
 import Unit from './model/Unit';
 import { Router } from '@angular/router';
+import RegionGenerator from './services/RegionGenerator';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   game: Game | undefined;
 
   constructor(
-    private gameRepository: GameRepository, private assignmentService: AssignmentService, private pubsubService: PubsubService, public router: Router) {
+    private gameRepository: GameRepository, private assignmentService: AssignmentService, private pubsubService: PubsubService, public router: Router, private regionGenerator: RegionGenerator) {
   }
 
   public get isLoaded() {
@@ -54,5 +55,10 @@ export class AppComponent {
         new NextTurnMessage()
       );
     }
+  }
+
+  GenerateRegion(){
+    debugger;
+    alert(this.regionGenerator.Generate().name);
   }
 }

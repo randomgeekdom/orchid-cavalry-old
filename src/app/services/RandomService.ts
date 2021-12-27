@@ -6,6 +6,14 @@ import { Injectable } from "@angular/core";
     providedIn: 'root',
   })
 export default class BiomeService{
+    DiceRoll(numberOfDice: number, numberOfSides: number): number {
+        var value = 0;
+        for(let i=0;i<numberOfDice; i++){
+            value+=this.GetRandomInt(1, numberOfDice+1);
+        }
+
+        return value;
+    }
 
     GetRandomElement<T>(array: T[]):T | undefined
     {

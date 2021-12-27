@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Biome } from "../model/Enums/Biome";
 import Region from "../model/Region";
 import BiomeService from "./RandomService";
 import RandomService from "./RandomService";
-import RegionNameGenerator from "./RegionNameGenerator";
+import NameGenerator from "./NameGenerator";
 
 
 @Injectable({
@@ -12,14 +11,20 @@ import RegionNameGenerator from "./RegionNameGenerator";
     providedIn: 'root',
   })
 export default class RegionGenerator{
-    constructor(private randomService: RandomService, private regionNameGenerator: RegionNameGenerator){}
+    constructor(private randomService: RandomService, private nameGenerator: NameGenerator){}
 
     public Generate(): Region{
         var region = new Region();
-        region.biome = <Biome>this.randomService.GetRandomElement(Object.values(Biome));
-        //region.municipalities Generate Names
         //region.rulingFaction Generate Faction
-        region.name = this.regionNameGenerator.GenerateName(region.biome);
+        region.type = <string>this.randomService.GetRandomElement(this.nameGenerator.regionTypeSuffixDictionary.map(x=>x.regionType));
+        region.name = this.nameGenerator.GenerateRegionName(region.type);
+
+        for(let i =0; i<this.randomService.GetRandomInt(1, 10); i++){
+            region.municipalities.push(this.nameGenerator.GenerateMunicipalName());
+        }
+
         return region;
     }
+
+
 }
