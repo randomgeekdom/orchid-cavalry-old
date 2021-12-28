@@ -1,5 +1,5 @@
-export enum AssignmentStatus{
-    Open,
-    InProgress,
-    Complete
+export enum AssignmentStatus {
+  Open,
+  InProgress,
+  Complete
 }

@@ -47,7 +47,7 @@ export default class NameGenerator {
             }
         ];
 
-    public municipalNamePrefixes =[
+    public municipalNamePrefixes = [
         "Saint",
         "Fort",
         "New",
@@ -55,7 +55,7 @@ export default class NameGenerator {
         "Good"
     ];
 
-    public municipalNameSuffixes=[
+    public municipalNameSuffixes = [
         "ton",
         "ville",
         "town",
@@ -66,6 +66,28 @@ export default class NameGenerator {
         " Village"
     ];
 
+    public factionNames = [
+        "Alliance",
+        "Battalion",
+        "Brigade",
+        "Clan",
+        "Compatriots",
+        "Comrades",
+        "Committee",
+        "Crusaders",
+        "Division",
+        "Group",
+        "Infantry",
+        "Knights",
+        "Party",
+        "People",
+        "Order",
+        "Patriots",
+        "Regiment",
+        "Warriors",
+        "Zealots"
+    ];
+
     GenerateRegionName(regionType: string): string {
         var regionTypeNames = <string[]>this.regionTypeSuffixDictionary.find(x => x.regionType == regionType)?.names;
 
@@ -73,14 +95,21 @@ export default class NameGenerator {
         return `The ${slug} ${<string>this.randomService.GetRandomElement(regionTypeNames)}`;
     }
 
-    GenerateMunicipalName(): string{
-        var usePrefix = this.randomService.DiceRoll(1, 20) >=15;
-        var useSuffix = this.randomService.DiceRoll(1, 10) >=8;
+    GenerateMunicipalName(): string {
+        var usePrefix = this.randomService.DiceRoll(1, 20) >= 15;
+        var useSuffix = this.randomService.DiceRoll(1, 10) >= 8;
 
         var prefix = usePrefix ? this.randomService.GetRandomElement(this.municipalNamePrefixes) + " " : "";
         var suffix = useSuffix ? this.randomService.GetRandomElement(this.municipalNameSuffixes) : "";
 
         return prefix + this.GetSlug() + suffix;
+    }
+
+    GenerateFactionName(): string {
+        const slug = this.GetSlug();
+        return this.randomService.GetRandomInt(0,2)==0 
+            ?   `The ${slug} ${<string>this.randomService.GetRandomElement(this.factionNames)}`
+            :   `The ${<string>this.randomService.GetRandomElement(this.factionNames)} of ${slug}`;
     }
 
     GetSlug(): string {

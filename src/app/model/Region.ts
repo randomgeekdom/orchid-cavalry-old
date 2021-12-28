@@ -1,6 +1,8 @@
+import { Guid } from "guid-typescript";
+
 export default class Region{
     name = "";
     type = "";
-    rulingFaction = "";
+    rulingFactionKey = Guid.createEmpty();
     municipalities: string[] = [];
 }

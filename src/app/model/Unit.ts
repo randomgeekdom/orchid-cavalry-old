@@ -9,5 +9,5 @@ export default class Unit{
     public Characteristics: Characteristic[] = [];
     public IsComplexUnit = false; 
     public Identifier: UnitIdentifier = UnitIdentifier.Leader;
-    public CurrentAssignmenSelection: AssignmentSelection | undefined;
+    public CurrentAssignmentSelection: AssignmentSelection | undefined;
 }

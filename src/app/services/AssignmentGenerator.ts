@@ -15,7 +15,8 @@ export default class AssignmentGenerator{
         explorationAssignment.Icon = "map";
         explorationAssignment.Title = "General Exploration";
         explorationAssignment.Description = "Explore the world and discover new locations.";
-        explorationAssignment.Type = AssignmentType.Exploration;
+        explorationAssignment.Type = AssignmentType.GeneralExploration;
+        explorationAssignment.Turns = 3;
 
         var option = new AssignmentOption();
         option.Characteristic = Characteristic.Exploration;

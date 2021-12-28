@@ -12,7 +12,7 @@ export default class Assignment{
     public Status: AssignmentStatus = AssignmentStatus.Open;
     public Description = "";
     public Options: AssignmentOption[] = [];
-    public Type = AssignmentType.Exploration;
+    public Type = AssignmentType.GeneralExploration;
 
     constructor(){
         this.Key = Guid.create();

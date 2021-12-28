@@ -7,6 +7,7 @@ import { NextTurnMessage } from './services/NextTurnMessage';
 import Unit from './model/Unit';
 import { Router } from '@angular/router';
 import RegionGenerator from './services/RegionGenerator';
+import NameGenerator from './services/NameGenerator';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,11 @@ export class AppComponent {
   game: Game | undefined;
 
   constructor(
-    private gameRepository: GameRepository, private assignmentService: AssignmentService, private pubsubService: PubsubService, public router: Router, private regionGenerator: RegionGenerator) {
+    private gameRepository: GameRepository, 
+    private assignmentService: AssignmentService, 
+    private pubsubService: PubsubService, 
+    public router: Router,
+     private nameGenerator: NameGenerator) {
   }
 
   public get isLoaded() {
@@ -57,8 +62,7 @@ export class AppComponent {
     }
   }
 
-  GenerateRegion(){
-    debugger;
-    alert(this.regionGenerator.Generate().name);
+  Generate(){
+    console.log(this.nameGenerator.GenerateFactionName());
   }
 }

@@ -3,6 +3,7 @@ import { AssignmentStatus } from '../model/Enums/AssignmentStatus';
 import { AssignmentType } from '../model/Enums/AssignmentType';
 import Game from '../model/Game';
 import AssignmentGenerator from './AssignmentGenerator';
+import AssignmentResolver from './AssignmentResolver';
 
 @Injectable({
   // declares that this service should be created
@@ -10,22 +11,30 @@ import AssignmentGenerator from './AssignmentGenerator';
   providedIn: 'root',
 })
 export default class AssignmentService {
-  constructor(private assignmentGenerator: AssignmentGenerator){
+  constructor(private assignmentGenerator: AssignmentGenerator, private assignmentResolver: AssignmentResolver){
 
   }
 
   public GetNewAssignments(game: Game): void {
-
+    debugger;
     var currentAssignments = game.Assignments;
     currentAssignments.forEach(a => {
       a.Expiration--;
     });
 
-    //Code for in progress assignments that get to 0.  Create an assignment resolver service
+    game.Assignments.filter(x=>x.Status==AssignmentStatus.InProgress).forEach(x=>x.Turns--);
+    //This section will resolve ended assignments
+    var endedAssignments = currentAssignments.filter(x => x.Turns<=0);
+    for(let i =0; i<endedAssignments.length; i++){
+      this.assignmentResolver.Resolve(game, endedAssignments[i]);
+      endedAssignments[i].Status = AssignmentStatus.Complete;
+    }
 
-    var returnAssignments = currentAssignments.filter(x => x.Expiration == 0 && x.Status == AssignmentStatus.Open);
+    //Code for setting expired assignments to complete
 
-    if (!returnAssignments.find(x=>x.Type == AssignmentType.Exploration)) {
+    var returnAssignments = currentAssignments.filter(x => x.Status!=AssignmentStatus.Complete);
+
+    if (!returnAssignments.find(x=>x.Type == AssignmentType.GeneralExploration) && game.Regions.length < 35) {
       returnAssignments.push(this.assignmentGenerator.GetExplorationAssignment());
     }
 

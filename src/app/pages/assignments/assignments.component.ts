@@ -51,7 +51,8 @@ GetStatusText(status: AssignmentStatus): string{
   }
 
   AssignUnit(unit: Unit){
-    unit.CurrentAssignmenSelection = this.selectedAssignment;
+    debugger;
+    unit.CurrentAssignmentSelection = this.selectedAssignment;
     var assignment = this.game?.Assignments?.find(x=>x.Key == this.selectedAssignment?.assignmentKey);
     if(!!assignment){
       assignment.Status = AssignmentStatus.InProgress;
@@ -72,7 +73,7 @@ GetStatusText(status: AssignmentStatus): string{
   }
 
   GetOpenUnits(): Unit[] {
-    return this.game?.Units?.filter(x=>!x.CurrentAssignmenSelection) || [];
+    return this.game?.Units?.filter(x=>!x.CurrentAssignmentSelection) || [];
   }
 
 }
