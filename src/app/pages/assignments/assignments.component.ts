@@ -7,8 +7,6 @@ import { PubsubService } from '@fsms/angular-pubsub';
 import AssignmentSelection from '../../model/AssignmentSelection';
 import AssignmentOption from 'src/app/model/AssignmentOption';
 import { AssignmentStatus } from 'src/app/model/Enums/AssignmentStatus';
-import Game from 'src/app/model/Game';
-import { RefreshMessage } from 'src/app/messages/RefreshMessage';
 
 @Component({
   selector: 'app-assignments',
@@ -16,11 +14,10 @@ import { RefreshMessage } from 'src/app/messages/RefreshMessage';
   styleUrls: ['./assignments.component.scss']
 })
 export default class AssignmentsComponent extends BaseComponent {
-  game: Game | undefined;
   selectedAssignment: AssignmentSelection | undefined;
 
-  constructor(private gameRepository: GameRepository, pubsubService: PubsubService) {
-    super(pubsubService);
+  constructor(pubsubService: PubsubService, gameRepository: GameRepository) {
+    super(pubsubService, gameRepository);
   }
 
   Reload(){
@@ -59,11 +56,7 @@ GetStatusText(status: AssignmentStatus): string{
     }
     this.selectedAssignment = undefined;
 
-    if(!!this.game){
-      this.gameRepository.SaveGame(this.game);
-      
-      this.refresh();
-    }
+    this.save();
   }
 
   IsSelectingUnit(): boolean{

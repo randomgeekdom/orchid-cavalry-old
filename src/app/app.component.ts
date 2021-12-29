@@ -14,20 +14,18 @@ import BaseComponent from './BaseComponent';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent extends BaseComponent {
-  Reload(): void {
-    this.game = this.gameRepository.GetGame();
-  }
+
 
   title: string = 'orchid-cavalry';
   game: Game | undefined;
 
   constructor(
-    private gameRepository: GameRepository,
+    gameRepository: GameRepository,
     private assignmentService: AssignmentService,
     public router: Router,
     private nameGenerator: NameGenerator,
     pubsubService: PubsubService) {
-    super(pubsubService);
+    super(pubsubService, gameRepository);
   }
 
   
@@ -56,9 +54,7 @@ export class AppComponent extends BaseComponent {
   NextTurn() {
     if (!!this.game) {
       this.assignmentService.GetNewAssignments(this.game);
-      this.gameRepository.SaveGame(this.game);
-
-      this.refresh();
+      this.save();
     }
   }
 

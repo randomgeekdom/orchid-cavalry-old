@@ -2,13 +2,19 @@
 import { Component, OnInit } from '@angular/core';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
 import { RefreshMessage } from './messages/RefreshMessage';
+import Game from './model/Game';
+import GameRepository from './services/GameRepository';
 
 @Component({
   template: ''
 })
 export default abstract class BaseComponent implements OnInit {
   protected subscriptions: PubsubSubscription[] = [];
-  abstract Reload(): void;
+  public game: Game | undefined;
+
+  Reload(): void {
+    this.game = this.gameRepository.GetGame();
+  }
 
   refresh() {
     this.pubsubService.publish(
@@ -16,7 +22,12 @@ export default abstract class BaseComponent implements OnInit {
     );
   }
 
-  constructor(protected pubsubService: PubsubService) {
+  save(){
+    this.gameRepository.SaveGame(<Game>this.game);
+    this.refresh();
+  }
+
+  constructor(protected pubsubService: PubsubService, protected gameRepository: GameRepository) {
   }
 
   ngOnInit(): void {

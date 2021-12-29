@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Unit from 'src/app/model/Unit';
 import GameRepository from 'src/app/services/GameRepository';
-import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
-import { UnitIdentifier } from 'src/app/model/Enums/UnitIdentifier';
+import { PubsubService } from '@fsms/angular-pubsub';
 import BaseComponent from 'src/app/BaseComponent';
-import { RefreshMessage } from 'src/app/messages/RefreshMessage';
 
 @Component({
   selector: 'app-units',
@@ -14,8 +12,8 @@ import { RefreshMessage } from 'src/app/messages/RefreshMessage';
 export class UnitsComponent extends BaseComponent {
   units: Unit[] | undefined;
 
-  constructor(private gameRepository: GameRepository, pubsubService: PubsubService) {
-    super(pubsubService);
+  constructor(pubsubService: PubsubService, gameRepository: GameRepository) {
+    super(pubsubService, gameRepository);
   }
 
   Reload() {
