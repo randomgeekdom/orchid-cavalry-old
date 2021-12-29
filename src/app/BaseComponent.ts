@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
-import { NextTurnMessage } from 'src/app/services/NextTurnMessage';
+import { NextTurnMessage } from './messages/NextTurnMessage';
 
 @Component({
     template: ''

@@ -3,11 +3,11 @@ import Game from 'src/app/model/Game';
 import AssignmentService from './services/AssignmentService';
 import GameRepository from './services/GameRepository';
 import { PubsubService } from '@fsms/angular-pubsub';
-import { NextTurnMessage } from './services/NextTurnMessage';
 import Unit from './model/Unit';
 import { Router } from '@angular/router';
-import RegionGenerator from './services/RegionGenerator';
 import NameGenerator from './services/NameGenerator';
+import { BaseGameRefreshMessage } from './messages/BaseGameRefreshMessage';
+import { NextTurnMessage } from './messages/NextTurnMessage';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ import NameGenerator from './services/NameGenerator';
 export class AppComponent {
   title: string = 'orchid-cavalry';
   game: Game | undefined;
+  subscriptions: any;
 
   constructor(
     private gameRepository: GameRepository, 
@@ -32,7 +33,14 @@ export class AppComponent {
 
   ngOnInit() {
     this.game = this.gameRepository.GetGame();
+    this.subscriptions.push(
+      this.pubsubService.subscribe({ 
+        messageType: BaseGameRefreshMessage.messageType,
+        callback: (msg) => this.game=this.gameRepository.GetGame(),
+      })
+    );
   }
+  
 
   StartGame() {
     var result = prompt("What is your character's first name?");

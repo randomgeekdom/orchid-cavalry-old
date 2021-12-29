@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import Unit from 'src/app/model/Unit';
 import GameRepository from 'src/app/services/GameRepository';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
-import { NextTurnMessage } from 'src/app/services/NextTurnMessage';
 import { UnitIdentifier } from 'src/app/model/Enums/UnitIdentifier';
 import BaseComponent from 'src/app/BaseComponent';
+import { NextTurnMessage } from 'src/app/messages/NextTurnMessage';
 
 @Component({
   selector: 'app-units',
