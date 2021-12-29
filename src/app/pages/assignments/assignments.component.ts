@@ -8,6 +8,7 @@ import AssignmentSelection from '../../model/AssignmentSelection';
 import AssignmentOption from 'src/app/model/AssignmentOption';
 import { AssignmentStatus } from 'src/app/model/Enums/AssignmentStatus';
 import Game from 'src/app/model/Game';
+import { BaseGameRefreshMessage } from 'src/app/messages/BaseGameRefreshMessage';
 
 @Component({
   selector: 'app-assignments',
@@ -51,7 +52,6 @@ GetStatusText(status: AssignmentStatus): string{
   }
 
   AssignUnit(unit: Unit){
-    debugger;
     unit.CurrentAssignmentSelection = this.selectedAssignment;
     var assignment = this.game?.Assignments?.find(x=>x.Key == this.selectedAssignment?.assignmentKey);
     if(!!assignment){
@@ -61,6 +61,10 @@ GetStatusText(status: AssignmentStatus): string{
 
     if(!!this.game){
       this.gameRepository.SaveGame(this.game);
+      
+      this.pubsubService.publish(
+        new BaseGameRefreshMessage()
+      );
     }
   }
 
