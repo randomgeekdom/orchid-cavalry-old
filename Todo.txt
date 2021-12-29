@@ -1,0 +1,11 @@
+Alerts
+
+Loading screen during next turn
+
+Add "electron" wrapper
+
+Add "Syndicate" to faction suffixes
+
+Orchid Cavalry - favicon
+
+World Tab
