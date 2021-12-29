@@ -3,5 +3,5 @@ import { AssignmentOptionType } from "./Enums/AssignmentOptionType";
 
 export default class AssignmentSelection{
 
-    constructor(public assignmentKey: Guid, public optionType: AssignmentOptionType){}
+    constructor(public assignmentKey: string, public optionType: AssignmentOptionType){}
 }

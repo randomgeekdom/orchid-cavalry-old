@@ -1,8 +1,8 @@
 import { DefineMessage, IMessageSchema, IMessage } from '@fsms/angular-pubsub';
 
 @DefineMessage<IMessageSchema>()
-export class NextTurnMessage implements IMessage {
+export class RefreshMessage implements IMessage {
   static messageType = 'Next Turn';
-  messageType = NextTurnMessage.messageType;
+  messageType = RefreshMessage.messageType;
   constructor(public payload?: string) {}
 }

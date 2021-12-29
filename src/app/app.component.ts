@@ -6,41 +6,35 @@ import { PubsubService } from '@fsms/angular-pubsub';
 import Unit from './model/Unit';
 import { Router } from '@angular/router';
 import NameGenerator from './services/NameGenerator';
-import { BaseGameRefreshMessage } from './messages/BaseGameRefreshMessage';
-import { NextTurnMessage } from './messages/NextTurnMessage';
+import BaseComponent from './BaseComponent';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent extends BaseComponent {
+  Reload(): void {
+    this.game = this.gameRepository.GetGame();
+  }
+
   title: string = 'orchid-cavalry';
   game: Game | undefined;
-  subscriptions: any;
 
   constructor(
-    private gameRepository: GameRepository, 
-    private assignmentService: AssignmentService, 
-    private pubsubService: PubsubService, 
+    private gameRepository: GameRepository,
+    private assignmentService: AssignmentService,
     public router: Router,
-     private nameGenerator: NameGenerator) {
+    private nameGenerator: NameGenerator,
+    pubsubService: PubsubService) {
+    super(pubsubService);
   }
+
+  
 
   public get isLoaded() {
     return !!this.game;
   }
-
-  ngOnInit() {
-    this.game = this.gameRepository.GetGame();
-    this.subscriptions.push(
-      this.pubsubService.subscribe({ 
-        messageType: BaseGameRefreshMessage.messageType,
-        callback: (msg) => this.game=this.gameRepository.GetGame(),
-      })
-    );
-  }
-  
 
   StartGame() {
     var result = prompt("What is your character's first name?");
@@ -64,13 +58,11 @@ export class AppComponent {
       this.assignmentService.GetNewAssignments(this.game);
       this.gameRepository.SaveGame(this.game);
 
-      this.pubsubService.publish(
-        new NextTurnMessage()
-      );
+      this.refresh();
     }
   }
 
-  Generate(){
+  Generate() {
     console.log(this.nameGenerator.GenerateFactionName());
   }
 }

@@ -4,7 +4,7 @@ import GameRepository from 'src/app/services/GameRepository';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
 import { UnitIdentifier } from 'src/app/model/Enums/UnitIdentifier';
 import BaseComponent from 'src/app/BaseComponent';
-import { NextTurnMessage } from 'src/app/messages/NextTurnMessage';
+import { RefreshMessage } from 'src/app/messages/RefreshMessage';
 
 @Component({
   selector: 'app-units',
@@ -20,15 +20,5 @@ export class UnitsComponent extends BaseComponent {
 
   Reload() {
     this.units = this.gameRepository.GetGame()?.Units;
-  }
-
-  ngOnInit(): void {
-    this.Reload();
-    this.subscriptions.push(
-      this.pubsubService.subscribe({
-        messageType: NextTurnMessage.messageType,
-        callback: (msg) => this.Reload(),
-      })
-    );
   }
 }

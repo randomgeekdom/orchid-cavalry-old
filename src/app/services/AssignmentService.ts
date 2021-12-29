@@ -16,7 +16,6 @@ export default class AssignmentService {
   }
 
   public GetNewAssignments(game: Game): void {
-    debugger;
     var currentAssignments = game.Assignments;
     currentAssignments.forEach(a => {
       a.Expiration--;

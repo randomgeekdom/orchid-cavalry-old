@@ -4,7 +4,7 @@ import { AssignmentStatus } from "./Enums/AssignmentStatus";
 import { AssignmentType } from "./Enums/AssignmentType";
 
 export default class Assignment{
-    public readonly Key: Guid; 
+    public readonly Key = Guid.create().toString(); 
     public Icon = "building";
     public Title = "";
     public Turns = 1;
@@ -13,10 +13,5 @@ export default class Assignment{
     public Description = "";
     public Options: AssignmentOption[] = [];
     public Type = AssignmentType.GeneralExploration;
-
-    constructor(){
-        this.Key = Guid.create();
-    }
-
 
 }

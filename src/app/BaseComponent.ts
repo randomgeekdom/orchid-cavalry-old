@@ -1,27 +1,32 @@
 
 import { Component, OnInit } from '@angular/core';
 import { PubsubService, PubsubSubscription } from '@fsms/angular-pubsub';
-import { NextTurnMessage } from './messages/NextTurnMessage';
+import { RefreshMessage } from './messages/RefreshMessage';
 
 @Component({
-    template: ''
-  })
-export default abstract class BaseComponent implements OnInit{
-    protected subscriptions: PubsubSubscription[] = [];
-    abstract Reload(): void;
+  template: ''
+})
+export default abstract class BaseComponent implements OnInit {
+  protected subscriptions: PubsubSubscription[] = [];
+  abstract Reload(): void;
 
-    constructor(protected pubsubService: PubsubService){
+  refresh() {
+    this.pubsubService.publish(
+      new RefreshMessage()
+    );
+  }
 
-    }
+  constructor(protected pubsubService: PubsubService) {
+  }
 
-    ngOnInit(): void {
-        this.Reload();
-        this.subscriptions.push(
-          this.pubsubService.subscribe({ 
-            messageType: NextTurnMessage.messageType,
-            callback: (msg) => this.Reload(),
-          })
-        );
-      }
-      
+  ngOnInit(): void {
+    this.Reload();
+    this.subscriptions.push(
+      this.pubsubService.subscribe({
+        messageType: RefreshMessage.messageType,
+        callback: (msg) => this.Reload(),
+      })
+    );
+  }
+
 }

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Guid } from "guid-typescript";
 import Assignment from "../model/Assignment";
 import { AssignmentType } from "../model/Enums/AssignmentType";
 import Game from "../model/Game";
@@ -13,7 +14,7 @@ import RegionGenerator from "./RegionGenerator";
 export default class AssignmentResolver{
     constructor(private regionGenerator: RegionGenerator){}
     Resolve(game: Game, assignment: Assignment){
-        var unit = <Unit>game.Units.find(x=>x.CurrentAssignmentSelection?.assignmentKey==assignment.Key);
+        var unit = <Unit>game.Units.find(x=>assignment.Key == x.CurrentAssignmentSelection?.assignmentKey);
         switch(assignment.Type){
             case AssignmentType.GeneralExploration:
                 unit.CurrentAssignmentSelection = undefined;
