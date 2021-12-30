@@ -15,22 +15,22 @@ export default class NameGenerator {
         [
             {
                 regionType: "Desert",
-                icon: "fa-thin fa-cactus",
+                icon: "fa fa-sun",
                 names: ["Desert", "Dunes", "Sands"]
             },
             {
                 regionType: "Coast",
-                icon: "",
+                icon: "fa fa-water",
                 names: ["Coast", "Shore", "Beach"]
             },
             {
                 regionType: "Forest",
-                icon: "",
+                icon: "fa fa-tree",
                 names: ["Forest", "Rainforest", "Jungle", "Wood", "Woods", "Woodlands"]
             },
             {
                 regionType: "Island",
-                icon: "",
+                icon: "fa fa-umbrella-beach",
                 names: ["Island", "Islands", "Isle", "Isles", "Archipelago", "Atoll"]
             },
             {
@@ -40,17 +40,17 @@ export default class NameGenerator {
             },
             {
                 regionType: "Plains",
-                icon: "",
+                icon: "fa fa-wind",
                 names: ["Grassland", "Grasslands", "Savannah", "Plains", "Fields"]
             },
             {
                 regionType: "Swamp",
-                icon: "",
+                icon: "fa fa-frog",
                 names: ["Swamps", "Swamplands", "Marshes", "Marshlands", "Bog"]
             },
             {
                 regionType: "Tundra",
-                icon: "",
+                icon: "fa fa-icicles",
                 names: ["Icefields", "Snowfields", "Tundra", "Frostlands"]
             }
         ];

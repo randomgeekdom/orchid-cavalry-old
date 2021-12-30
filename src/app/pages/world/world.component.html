@@ -8,8 +8,8 @@
             <div class="card-body">
               <h4 class="card-title">{{region.name}}</h4>
               <h6 class="card-subtitle text-muted" >
-                  <!-- <i [class]="GetIcon(region.type)"></i> -->
-                  {{region.type}}
+                  <i [class]="GetIcon(region.type)"></i> {{region.type}}
+                  <!-- <img src="./assets/desert.png" class="img-fluid img-thumbnail rounded-circle border-2" alt="Cactus Icon"> -->
                 </h6>
     
               <p class="card-text" *ngFor="let municipality of region.municipalities">
