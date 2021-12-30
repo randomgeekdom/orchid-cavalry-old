@@ -10,6 +10,6 @@ Orchid Cavalry - favicon
 
 World Tab
 
-Create temporary reset button
-
 Assingment - aDd location
+
+Units Page (show if deployed)

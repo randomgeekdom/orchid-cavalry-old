@@ -30,7 +30,7 @@ export class AppComponent extends BaseComponent {
 
   
 
-  public get isLoaded() {
+  public get HasStarted() {
     return !!this.game;
   }
 
@@ -65,5 +65,16 @@ export class AppComponent extends BaseComponent {
   Reset(): void{
     localStorage.removeItem("game");
     window.location.reload();
+  }
+
+  get HasAlerts(): boolean{
+    return !!this.game && this.game?.Alerts.length>0;
+  }
+
+  ClearAlert(alert: string): void{
+    debugger;
+    this.game?.History.push(alert);
+    this.game?.Alerts.splice(this.game.Alerts.indexOf(alert),1);
+    this.save();
   }
 }

@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div>
-    <div *ngIf="!isLoaded">
+    <div *ngIf="!HasStarted">
       <p class="mx-5">You have inherited Orchid Island, the last basion of a once powerful military force that, long
         ago, saved the world from catastrophe. Your goal is to restore the name and glory of the...</p>
     </div>
@@ -9,34 +9,45 @@
       <a [routerLink]=""><img alt="Orchid Cavalry Logo" class="img-fluid" src="../assets/logo.png"></a>
     </div>
 
-    <div *ngIf="!isLoaded" class="d-flex justify-content-center">
+    <div *ngIf="!HasStarted" class="d-flex justify-content-center">
       <a class="btn btn-dark" (click)="StartGame()">START</a>
     </div>
 
-    <div *ngIf="isLoaded">
-      <nav class="navbar navbar-dark bg-dark ">
-        <a *ngFor="let route of router.config" class="navbar-brand" [routerLink]="route.path">{{route.path}}</a>
-<!--         
-        <a class="navbar-brand">Treasury</a>
-        <a class="navbar-brand">Factions</a>
-        <a class="navbar-brand">History</a>
-        <a class="navbar-brand">Achievements</a>
-        <a class="navbar-brand">Game Data</a>  -->
-      </nav>
+    <div *ngIf="HasStarted">
+      <div *ngIf="!HasAlerts">
+        <nav class="navbar navbar-dark bg-dark ">
+          <a *ngFor="let route of router.config" class="navbar-brand" [routerLink]="route.path">{{route.path}}</a>
+          <!--         
+          <a class="navbar-brand">Treasury</a>
+          <a class="navbar-brand">Factions</a>
+          <a class="navbar-brand">History</a>
+          <a class="navbar-brand">Achievements</a>
+          <a class="navbar-brand">Game Data</a>  -->
+        </nav>
 
-      <div class = "jumbotron">
-        <router-outlet></router-outlet>
+        <div class="jumbotron">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="d-flex justify-content-center">
+          <a (click)="NextTurn()" class="btn btn-success">
+            Next Turn
+          </a>
+        </div>
+
+        <!-- <a class="btn btn-red" (click)="Generate()">Generate</a> -->
+
+        <a class="btn btn-danger" (click)="Reset()">Reset</a>
+
       </div>
-      <div *ngIf="isLoaded" class="d-flex justify-content-center">
-        <a (click)="NextTurn()" class="btn btn-success">
-          Next Turn
-        </a>
+
+      <div *ngIf="HasAlerts">
+        <div *ngFor="let alert of game?.Alerts" class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{alert}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="ClearAlert(alert)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
-
-      <!-- <a class="btn btn-red" (click)="Generate()">Generate</a> -->
-
-      <a class="btn btn-danger" (click)="Reset()">Reset</a>
-
     </div>
   </div>
 </div>
