@@ -9,14 +9,14 @@ import BaseComponent from 'src/app/BaseComponent';
   templateUrl: './units.component.html',
   styleUrls: ['./units.component.scss']
 })
-export class UnitsComponent extends BaseComponent {
-  units: Unit[] | undefined;
+export default class UnitsComponent extends BaseComponent {
 
   constructor(pubsubService: PubsubService, gameRepository: GameRepository) {
     super(pubsubService, gameRepository);
   }
 
-  Reload() {
-    this.units = this.gameRepository.GetGame()?.Units;
+  get units(): Unit[]{
+    return <Unit[]>this.game?.Units;
   }
+
 }

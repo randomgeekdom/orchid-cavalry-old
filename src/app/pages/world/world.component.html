@@ -1,0 +1,7 @@
+<div *ngIf="!game?.Regions || game?.Regions?.length==0" class="d-flex justify-content-center">
+    No Information Available about the Outside World
+</div>
+
+<div *ngFor="let region of game?.Regions">
+    {{region.name}}
+</div>

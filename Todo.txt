@@ -1,15 +1,13 @@
-Alerts
-
 Loading screen during next turn
-
-Add "electron" wrapper
 
 Add "Syndicate" to faction suffixes
 
 Orchid Cavalry - favicon
 
-World Tab
+World Tab - Make pretty
 
-Assingment - aDd location
+Assingment - aDd location to model and card
 
 Units Page (show if deployed)
+
+Add History tab
