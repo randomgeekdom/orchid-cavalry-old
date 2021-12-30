@@ -61,4 +61,9 @@ export class AppComponent extends BaseComponent {
   Generate() {
     console.log(this.nameGenerator.GenerateFactionName());
   }
+
+  Reset(): void{
+    localStorage.removeItem("game");
+    window.location.reload();
+  }
 }

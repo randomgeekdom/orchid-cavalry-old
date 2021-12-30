@@ -9,3 +9,7 @@ Add "Syndicate" to faction suffixes
 Orchid Cavalry - favicon
 
 World Tab
+
+Create temporary reset button
+
+Assingment - aDd location
