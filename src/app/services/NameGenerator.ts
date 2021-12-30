@@ -15,34 +15,42 @@ export default class NameGenerator {
         [
             {
                 regionType: "Desert",
+                icon: "fa-thin fa-cactus",
                 names: ["Desert", "Dunes", "Sands"]
             },
             {
                 regionType: "Coast",
+                icon: "",
                 names: ["Coast", "Shore", "Beach"]
             },
             {
                 regionType: "Forest",
+                icon: "",
                 names: ["Forest", "Rainforest", "Jungle", "Wood", "Woods", "Woodlands"]
             },
             {
                 regionType: "Island",
+                icon: "",
                 names: ["Island", "Islands", "Isle", "Isles", "Archipelago", "Atoll"]
             },
             {
                 regionType: "Mountains",
+                icon: "fa fa-mountain",
                 names: ["Mountains", "Range"]
             },
             {
                 regionType: "Plains",
+                icon: "",
                 names: ["Grassland", "Grasslands", "Savannah", "Plains", "Fields"]
             },
             {
                 regionType: "Swamp",
+                icon: "",
                 names: ["Swamps", "Swamplands", "Marshes", "Marshlands", "Bog"]
             },
             {
                 regionType: "Tundra",
+                icon: "",
                 names: ["Icefields", "Snowfields", "Tundra", "Frostlands"]
             }
         ];
@@ -97,9 +105,9 @@ export default class NameGenerator {
 
     GenerateMunicipalName(): string {
         var usePrefix = this.randomService.DiceRoll(1, 20) >= 15;
-        var useSuffix = this.randomService.DiceRoll(1, 10) >= 8;
+        var useSuffix = !usePrefix || this.randomService.DiceRoll(1, 10) >= 8;
 
-        var prefix = usePrefix ? this.randomService.GetRandomElement(this.municipalNamePrefixes) + " " : "";
+        var prefix = usePrefix ? (this.randomService.GetRandomElement(this.municipalNamePrefixes) + " ") : "";
         var suffix = useSuffix ? this.randomService.GetRandomElement(this.municipalNameSuffixes) : "";
 
         return prefix + this.GetSlug() + suffix;

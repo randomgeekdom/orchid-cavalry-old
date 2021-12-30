@@ -2,6 +2,23 @@
     No Information Available about the Outside World
 </div>
 
-<div *ngFor="let region of game?.Regions">
-    {{region.name}}
+<div class="row">
+    <div *ngFor="let region of game?.Regions">
+        <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">{{region.name}}</h4>
+              <h6 class="card-subtitle text-muted" >
+                  <!-- <i [class]="GetIcon(region.type)"></i> -->
+                  {{region.type}}
+                </h6>
+    
+              <p class="card-text" *ngFor="let municipality of region.municipalities">
+                    <i class="fa fa-city"></i>  {{municipality}}
+                </p>
+            </div>
+    
+          </div>
+    </div>
+    
+    
 </div>
