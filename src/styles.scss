@@ -4,13 +4,16 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
-html, body { height: 100%; }
+html, body {
+     height: 100%; 
+    }
 
 .jumbotron{
-    background-color: rgb(253, 237, 237);
+    background-color: rgb(237, 244, 253);
     border: 3px;
-    border-style: groove;
+    border-style: inset;
     border-color: darkslategrey;
+    text-align: center;
 }
 .card{
     margin: 5px;

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 
 import RandomService from "./RandomService";
 import { generateSlug } from "random-word-slugs";
+import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 
 @Injectable({
     // declares that this service should be created
@@ -92,6 +93,7 @@ export default class NameGenerator {
         "Order",
         "Patriots",
         "Regiment",
+        "Syndicate",
         "Warriors",
         "Zealots"
     ];
@@ -100,7 +102,7 @@ export default class NameGenerator {
         var regionTypeNames = <string[]>this.regionTypeSuffixDictionary.find(x => x.regionType == regionType)?.names;
 
         const slug = this.GetSlug();
-        return `The ${slug} ${<string>this.randomService.GetRandomElement(regionTypeNames)}`;
+        return `${slug} ${<string>this.randomService.GetRandomElement(regionTypeNames)}`;
     }
 
     GenerateMunicipalName(): string {
@@ -111,16 +113,37 @@ export default class NameGenerator {
         var suffix = useSuffix ? this.randomService.GetRandomElement(this.municipalNameSuffixes) : "";
 
         return prefix + this.GetSlug() + suffix;
+
     }
 
     GenerateFactionName(): string {
         const slug = this.GetSlug();
-        return this.randomService.GetRandomInt(0,2)==0 
-            ?   `The ${slug} ${<string>this.randomService.GetRandomElement(this.factionNames)}`
-            :   `The ${<string>this.randomService.GetRandomElement(this.factionNames)} of ${slug}`;
+        return this.randomService.GetRandomInt(0, 2) == 0
+            ? `The ${slug} ${<string>this.randomService.GetRandomElement(this.factionNames)}`
+            : `The ${<string>this.randomService.GetRandomElement(this.factionNames)} of ${slug}`;
     }
 
     GetSlug(): string {
-        return generateSlug(1, { format: "title" });
+        debugger;
+        var dict: string[] = [];
+        switch (this.randomService.GetRandomInt(0, 4)) {
+            case 0:
+                return generateSlug(1, { format: "title" });
+            case 1:
+                dict = colors;
+                break;
+            case 2:
+                dict = adjectives;
+                break;
+            case 3:
+                dict = animals;
+                break;
+        }
+
+        return uniqueNamesGenerator({
+            dictionaries: [dict],
+            length: 1,
+            style: "capital"
+        });
     }
 }

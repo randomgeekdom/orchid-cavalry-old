@@ -29,4 +29,8 @@ export default class BiomeService{
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
       }
+
+      GetRandomBool(): boolean{
+          return this.GetRandomInt(0,2) %2 == 0;
+      }
 }
