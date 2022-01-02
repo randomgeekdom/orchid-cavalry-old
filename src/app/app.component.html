@@ -1,5 +1,9 @@
-<div class="d-flex justify-content-center">
-  <div>
+
+<div class="d-flex justify-content-center" >
+  <div *ngIf="isLoading">
+    <img src="../assets/loading2.gif" alt="Loading Gif">
+  </div>
+  <div *ngIf="!isLoading">
     <div *ngIf="!HasStarted">
       <p class="mx-5">You have inherited Orchid Island, the last basion of a once powerful military force that, long
         ago, saved the world from catastrophe. Your goal is to restore the name and glory of the...</p>

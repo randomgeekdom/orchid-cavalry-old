@@ -18,6 +18,7 @@ export class AppComponent extends BaseComponent {
 
   title: string = 'orchid-cavalry';
   game: Game | undefined;
+  isLoading = false;
 
   constructor(
     gameRepository: GameRepository,
@@ -52,9 +53,11 @@ export class AppComponent extends BaseComponent {
   }
 
   NextTurn() {
+    this.isLoading = true;
     if (!!this.game) {
       this.assignmentService.GetNewAssignments(this.game);
       this.save();
+      this.isLoading = false;
     }
   }
 

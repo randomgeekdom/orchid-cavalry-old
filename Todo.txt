@@ -1,7 +1,3 @@
-Loading screen during next turn
-
-Add "Syndicate" to faction suffixes
-
 Orchid Cavalry - favicon
 
 World Tab - Make pretty

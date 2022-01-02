@@ -22,7 +22,7 @@ export default class NameGenerator {
             {
                 regionType: "Coast",
                 icon: "fa fa-water",
-                names: ["Coast", "Shore", "Beach"]
+                names: ["Coast", "Shore", "Beach", "Peninsula"]
             },
             {
                 regionType: "Forest",
@@ -102,7 +102,7 @@ export default class NameGenerator {
         var regionTypeNames = <string[]>this.regionTypeSuffixDictionary.find(x => x.regionType == regionType)?.names;
 
         const slug = this.GetSlug();
-        return `${slug} ${<string>this.randomService.GetRandomElement(regionTypeNames)}`;
+        return `The ${slug} ${<string>this.randomService.GetRandomElement(regionTypeNames)}`;
     }
 
     GenerateMunicipalName(): string {
