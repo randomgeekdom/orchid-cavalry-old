@@ -40,7 +40,12 @@
 
         <!-- <a class="btn btn-red" (click)="Generate()">Generate</a> -->
 
-        <a class="btn btn-danger" (click)="Reset()">Reset</a>
+        <div class="d-flex justify-content-center">
+        <div class="px-2"><a class="btn btn-danger" (click)="Reset()">Reset</a></div>
+        <div class="px-2"><a class="btn btn-primary" (click)="SaveData()">Save Data</a></div>
+        <div class="px-2"><a class="btn btn-secondary" (click)="LoadData()">Load Data</a></div>
+        
+        </div>
 
       </div>
 

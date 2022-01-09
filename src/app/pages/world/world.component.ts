@@ -16,7 +16,6 @@ export default class WorldComponent extends BaseComponent {
   }
 
   GetIcon(regionType: string): string{
-    debugger;
     return this.nameGenerator.regionTypeSuffixDictionary.find(x=>x.regionType==regionType)?.icon || "";
   }
 }

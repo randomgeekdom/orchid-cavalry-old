@@ -7,6 +7,7 @@ import Unit from './model/Unit';
 import { Router } from '@angular/router';
 import NameGenerator from './services/NameGenerator';
 import BaseComponent from './BaseComponent';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-root',
@@ -69,6 +70,12 @@ export class AppComponent extends BaseComponent {
     localStorage.removeItem("game");
     window.location.reload();
   }
+
+  SaveData(): void{
+    this.gameRepository.DownloadGame();
+  }
+
+  LoadData(): void{}
 
   get HasAlerts(): boolean{
     return !!this.game && this.game?.Alerts.length>0;
